@@ -37,3 +37,7 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+# Configuración local del agente (no versionar)
+AGENTS.md
+opencode.json
