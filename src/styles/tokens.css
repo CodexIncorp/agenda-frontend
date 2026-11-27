@@ -1,0 +1,100 @@
+/* src/styles/tokens.css
+   Tokens de diseño del sistema "Fresh Modern".
+   Única fuente de verdad de variables: todo el resto del CSS consume solo tokens.
+   Paleta de acento: esmeralda. */
+
+:root {
+    /* ---------- Neutros ---------- */
+    --bg: #f7f9f8; /* fondo general, casi blanco con matiz */
+    --surface: #ffffff; /* tarjetas, paneles */
+    --surface-2: #eef2f0; /* superficies secundarias, hovers */
+    --border: #e3e8e5; /* bordes sutiles */
+
+    /* ---------- Texto ---------- */
+    --text: #17211d; /* casi negro con matiz del acento */
+    --text-muted: #5c6b64; /* texto secundario */
+
+    /* ---------- Acento (escala esmeralda) ---------- */
+    --accent-50: #e8faf2;
+    --accent-100: #c7f2de;
+    --accent-300: #6fdfb2;
+    --accent-500: #10b981; /* color principal */
+    --accent-600: #059669; /* base de botones / hover */
+    --accent-700: #047857; /* hover / active */
+    --accent-800: #065f46; /* active */
+
+    /* ---------- Feedback ---------- */
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --danger-hover: #dc2626;
+    --info: #3b82f6;
+    --success: #10b981;
+
+    /* ---------- Tipografía ---------- */
+    --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --fs-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+    --fs-sm: clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);
+    --fs-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+    --fs-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
+    --fs-xl: clamp(1.35rem, 1.15rem + 0.7vw, 1.6rem);
+    --fs-2xl: clamp(1.75rem, 1.4rem + 1.4vw, 2.4rem);
+    --fs-3xl: clamp(2.25rem, 1.7rem + 2.4vw, 3.5rem);
+
+    /* ---------- Espaciado (base 4 px) ---------- */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+
+    /* ---------- Radios ---------- */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px; /* tarjetas protagonistas */
+    --radius-full: 999px; /* pills, avatares */
+
+    /* ---------- Sombras en capas ---------- */
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.05);
+    --shadow-2: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 12px rgb(0 0 0 / 0.06);
+    --shadow-3: 0 2px 4px rgb(0 0 0 / 0.04), 0 12px 32px rgb(0 0 0 / 0.1);
+    --shadow-accent: 0 4px 14px rgb(16 185 129 / 0.35);
+
+    /* ---------- Easings ---------- */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* ---------- Medidas ---------- */
+    --contenedor: 1200px;
+    --tactil-minimo: 44px;
+}
+
+/* ---------- Modo oscuro (Etapa 15) ---------- */
+/* Se redefine la escala, no se invierte: fondo casi negro verdoso,
+   superficies un paso más claras y acento más claro. */
+[data-theme="dark"] {
+    --bg: #0f1613;
+    --surface: #1a231f;
+    --surface-2: #222d28;
+    --border: #2a3530;
+
+    --text: #e8f0ec;
+    --text-muted: #9fb0a8;
+
+    /* Acento más claro para contraste sobre fondo oscuro */
+    --accent-50: #132a22;
+    --accent-100: #1b3a2e;
+    --accent-300: #6fdfb2;
+    --accent-500: #34d399;
+    --accent-600: #10b981;
+    --accent-700: #34d399;
+    --accent-800: #6fdfb2;
+
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-2: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 12px rgb(0 0 0 / 0.35);
+    --shadow-3: 0 2px 4px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.5);
+    --shadow-accent: 0 4px 14px rgb(16 185 129 / 0.25);
+}
