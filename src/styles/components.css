@@ -87,6 +87,37 @@
     transform: scale(0.97);
 }
 
+/* Botón de cambio de tema (claro / oscuro) */
+.navbar__tema {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--tactil-minimo);
+    height: var(--tactil-minimo);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.2s var(--ease-out), transform 0.15s var(--ease-out);
+}
+
+.navbar__tema:active {
+    transform: scale(0.94);
+    background: var(--surface-2);
+}
+
+.navbar__tema:focus-visible {
+    outline: 2px solid var(--accent-500);
+    outline-offset: 2px;
+}
+
+@media (hover: hover) {
+    .navbar__tema:hover {
+        background: var(--surface-2);
+    }
+}
+
 /* ============================================================
    Botones
    ============================================================ */
