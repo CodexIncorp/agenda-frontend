@@ -1,38 +1,125 @@
-# agenda-frontend
+# Agenda de Contactos — Front-End
 
-This template should help get you started developing with Vue 3 in Vite.
+Aplicación web **Full Stack** de gestión de contactos. Este repositorio contiene el **Front-End** desacoplado, desarrollado con **Vue 3**, que consume un **Back-End PHP** mediante peticiones HTTP.
 
-## Recommended IDE Setup
+> ⚠️ **Documentación preliminar.** Este README es una primera versión alineada a las especificaciones del proyecto y se pulirá en la etapa final.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Recommended Browser Setup
+## Tecnologías
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- **Vue 3** (Composition API, sintaxis `<script setup>`)
+- **Vue Router** (hash history, compatible con GitHub Pages)
+- **Pinia** (estado y persistencia del token)
+- **Fetch API** nativa para peticiones HTTP
+- **Vite** (build / dev server)
 
-## Customize configuration
+---
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Requisitos
 
-## Project Setup
+- Node.js `^22.18.0 || >=24.12.0`
+- npm
 
-```sh
-npm install
+---
+
+## Instalación y uso
+
+```bash
+npm install      # instalar dependencias
+npm run dev      # servidor de desarrollo
+npm run build    # build de producción (carpeta dist/)
+npm run preview  # previsualizar el build
 ```
 
-### Compile and Hot-Reload for Development
+---
 
-```sh
-npm run dev
+## Estructura del proyecto
+
+```
+/public
+  /config.json          # Único lugar donde se define la URL del API
+/src
+  /assets               # Estilos y recursos estáticos
+  /components           # Componentes reutilizables
+  /config
+    /api.js             # Lectura dinámica de /public/config.json
+  /router
+    /index.js           # Vue Router (Hash History) + guard de auth
+  /services             # Cliente HTTP y servicios (auth, contactos)
+  /stores
+    /auth.js            # Pinia store: token y datos del usuario
+  /views                # Componentes de página
+  App.vue
+  main.js
 ```
 
-### Compile and Minify for Production
+---
 
-```sh
-npm run build
+## Configuración del API (interoperabilidad)
+
+La URL base del API se define **únicamente** en `/public/config.json`:
+
+```json
+{
+    "API_URL": "https://equipo1.free.nf/api"
+}
 ```
+
+Para conectar el Front-End de este equipo con el Back-End de otro equipo, basta con **editar `config.json` y recargar el navegador**: no se recompila ni se modifica código fuente.
+
+---
+
+## Autenticación
+
+- Token propietario (no JWT, no sesiones PHP).
+- El token se guarda en Pinia y se persiste en `localStorage`.
+- Las peticiones protegidas envían `Authorization: Bearer <TOKEN>`.
+- Ante `401`/`403` se cierra la sesión y se redirige a `/login`.
+
+---
+
+## Endpoints consumidos
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| POST | `/auth/login.php` | Iniciar sesión |
+| POST | `/auth/registrar.php` | Registrar usuario |
+| GET  | `/auth/perfil.php` | Obtener perfil |
+| POST | `/auth/editar.php` | Editar perfil |
+| POST | `/auth/logout.php` | Cerrar sesión |
+| GET  | `/contactos/index.php` | Listar contactos |
+| GET  | `/contactos/detalle.php?id=` | Obtener contacto |
+| POST | `/contactos/crear.php` | Crear contacto |
+| POST | `/contactos/actualizar.php` | Actualizar contacto |
+| POST | `/contactos/eliminar.php` | Eliminar contacto |
+
+---
+
+## Rutas
+
+| Ruta | Descripción |
+|------|-------------|
+| `/` | Página principal |
+| `/login` | Inicio de sesión |
+| `/registro` | Registro de usuario |
+| `/agenda` | Lista de contactos |
+| `/agenda/crear` | Crear contacto |
+| `/agenda/:id` | Editar contacto |
+| `/perfil` | Perfil del usuario |
+
+---
+
+## Publicación
+
+- **Front-End:** GitHub Pages (hash history + `base` relativa en `vite.config.js`).
+- **Back-End:** hosting PHP.
+- **Repositorios:** GitHub (Front-End y Back-End por separado).
+
+---
+
+## Metodología de desarrollo
+
+- Ramas por feature con **GitHub Flow** y merge `--no-ff` a `main`.
+- Commits con **Conventional Commits** en español.
+- Cada etapa del desarrollo se documenta en commits atómicos.
