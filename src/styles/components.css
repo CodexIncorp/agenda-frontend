@@ -15,7 +15,7 @@
 }
 
 [data-theme="dark"] .navbar {
-    background: rgb(26 35 31 / 0.8);
+    background: rgb(34 25 19 / 0.8);
 }
 
 .navbar__inner {
@@ -450,7 +450,7 @@
 }
 
 .agenda__vacio-icono {
-    color: var(--accent-300);
+    color: var(--accent-cool);
 }
 
 .agenda__vacio-texto {
