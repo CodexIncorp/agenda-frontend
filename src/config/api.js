@@ -19,7 +19,9 @@ export async function getApiUrl() {
     }
 
     try {
-        const response = await fetch('/config.json');
+        // La ruta es relativa a la base de Vite (base: './') para funcionar
+        // tanto en la raíz del dominio como en una subruta de GitHub Pages.
+        const response = await fetch(`${import.meta.env.BASE_URL}config.json`);
 
         if (!response.ok) {
             throw new Error(`No se pudo cargar config.json (HTTP ${response.status})`);
