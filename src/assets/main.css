@@ -1,0 +1,245 @@
+/* src/assets/main.css
+   Estilos globales mobile-first.
+   La etapa 8 ampliará y pulirá estos estilos. */
+
+/* Variables de color y medidas */
+:root {
+    --color-primario: #2563eb;
+    --color-primario-hover: #1d4ed8;
+    --color-exito: #16a34a;
+    --color-error: #dc2626;
+    --color-info: #0284c7;
+    --color-texto: #1f2937;
+    --color-texto-suave: #6b7280;
+    --color-fondo: #f3f4f6;
+    --color-superficie: #ffffff;
+    --color-borde: #d1d5db;
+    --radio: 8px;
+    --sombra: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --tactil-minimo: 44px;
+}
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--color-texto);
+    background: var(--color-fondo);
+    line-height: 1.5;
+    /* Evita el retraso de toque en móviles */
+    touch-action: manipulation;
+}
+
+#app {
+    min-height: 100vh;
+}
+
+/* Layout principal */
+.app__contenido {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Navbar */
+.navbar {
+    background: var(--color-superficie);
+    box-shadow: var(--sombra);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.navbar__brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-primario);
+    text-decoration: none;
+}
+
+.navbar__links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+}
+
+.navbar__link {
+    color: var(--color-texto);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radio);
+    min-height: var(--tactil-minimo);
+    display: inline-flex;
+    align-items: center;
+}
+
+.navbar__link.router-link-active {
+    color: var(--color-primario);
+    font-weight: 600;
+}
+
+.navbar__link:active,
+.navbar__boton:active {
+    background: var(--color-fondo);
+}
+
+.navbar__boton {
+    border: none;
+    background: var(--color-error);
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radio);
+    cursor: pointer;
+    min-height: var(--tactil-minimo);
+    font-size: 1rem;
+}
+
+/* Botones genéricos */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: var(--tactil-minimo);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--radio);
+    background: var(--color-primario);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+.btn:active {
+    background: var(--color-primario-hover);
+}
+
+.btn--secundario {
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    border: 1px solid var(--color-borde);
+}
+
+.btn--peligro {
+    background: var(--color-error);
+}
+
+/* Formularios */
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.campo__label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.campo__obligatorio {
+    color: var(--color-error);
+}
+
+.campo__input {
+    min-height: var(--tactil-minimo);
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    font-size: 1rem;
+    width: 100%;
+    background: var(--color-superficie);
+}
+
+.campo__input:focus {
+    outline: 2px solid var(--color-primario);
+    outline-offset: 1px;
+}
+
+/* Alertas */
+.alerta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radio);
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.alerta--success {
+    background: var(--color-exito);
+}
+
+.alerta--error {
+    background: var(--color-error);
+}
+
+.alerta--info {
+    background: var(--color-info);
+}
+
+.alerta__cerrar {
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    min-width: var(--tactil-minimo);
+    min-height: var(--tactil-minimo);
+}
+
+/* Spinner */
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.spinner__circulo {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--color-borde);
+    border-top-color: var(--color-primario);
+    border-radius: 50%;
+    animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Placeholder de vistas en construcción */
+.vista-placeholder {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--color-texto-suave);
+}
