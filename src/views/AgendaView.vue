@@ -90,7 +90,7 @@ onMounted(cargarContactos);
         </p>
 
         <!-- Listado de contactos -->
-        <ul v-else class="contacto-lista">
+        <TransitionGroup v-else name="lista" tag="ul" class="contacto-lista">
             <li v-for="contacto in contactos" :key="contacto.id" class="contacto">
                 <img
                     v-if="contacto.foto"
@@ -164,6 +164,6 @@ onMounted(cargarContactos);
                     </template>
                 </div>
             </li>
-        </ul>
+        </TransitionGroup>
     </main>
 </template>
