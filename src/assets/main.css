@@ -1,6 +1,6 @@
 /* src/assets/main.css
    Estilos globales mobile-first.
-   La etapa 8 ampliará y pulirá estos estilos. */
+   Etapa 8: pulido final (táctil, accesibilidad, responsive, sin lag). */
 
 /* Variables de color y medidas */
 :root {
@@ -8,6 +8,7 @@
     --color-primario-hover: #1d4ed8;
     --color-exito: #16a34a;
     --color-error: #dc2626;
+    --color-error-hover: #b91c1c;
     --color-info: #0284c7;
     --color-texto: #1f2937;
     --color-texto-suave: #6b7280;
@@ -35,8 +36,9 @@ body {
     color: var(--color-texto);
     background: var(--color-fondo);
     line-height: 1.5;
-    /* Evita el retraso de toque en móviles */
+    /* Evita el retraso de toque y el destello gris al tocar en móviles */
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #app {
@@ -541,4 +543,105 @@ body {
     margin: 0;
     font-weight: 600;
     font-size: 1.1rem;
+}
+
+/* ============================================================
+   Refinamientos mobile-first (Etapa 8)
+   - Estados :active y :hover unificados (táctil + ratón).
+   - Accesibilidad: :focus-visible y respeto a prefers-reduced-motion.
+   - Responsive: mejor aprovechamiento en pantallas anchas.
+   ============================================================ */
+
+/* Variante secundaria: activo propio (evita que herede el azul del .btn). */
+.btn--secundario:active {
+    background: var(--color-borde);
+}
+
+/* Variante peligro: activo y hover propios. */
+.btn--peligro:active {
+    background: var(--color-error-hover);
+}
+
+/* Botones deshabilitados (durante peticiones). */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Foco visible para navegación con teclado (accesibilidad). */
+.btn:focus-visible,
+.navbar__link:focus-visible,
+.navbar__boton:focus-visible,
+.navbar__brand:focus-visible,
+.alerta__cerrar:focus-visible,
+.autenticacion__enlace a:focus-visible {
+    outline: 2px solid var(--color-primario);
+    outline-offset: 2px;
+}
+
+/* Estados :hover solo en dispositivos con puntero (evita "pegado" en táctil). */
+@media (hover: hover) {
+    .btn:hover {
+        background: var(--color-primario-hover);
+    }
+
+    .btn--secundario:hover {
+        background: var(--color-borde);
+    }
+
+    .btn--peligro:hover {
+        background: var(--color-error-hover);
+    }
+
+    .navbar__link:hover,
+    .navbar__boton:hover {
+        background: var(--color-fondo);
+    }
+
+    .navbar__boton:hover {
+        background: var(--color-error-hover);
+    }
+
+    .alerta__cerrar:hover {
+        opacity: 0.8;
+    }
+
+    .autenticacion__enlace a:hover {
+        text-decoration: underline;
+    }
+
+    .contacto:hover {
+        border-color: var(--color-primario);
+    }
+}
+
+/* Pantallas anchas: acciones en línea y tarjetas en columnas. */
+@media (min-width: 480px) {
+    .inicio__acciones {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .inicio__info {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .contacto__acciones {
+        margin-left: auto;
+    }
+
+    .contacto-form__acciones .btn {
+        flex: 0 0 auto;
+    }
+}
+
+/* Respeta la preferencia de movimiento reducido del usuario. */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
 }
