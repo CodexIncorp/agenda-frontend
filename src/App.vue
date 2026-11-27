@@ -1,11 +1,13 @@
-<script setup></script>
+<script setup>
+// Layout principal: navbar fijo arriba y el contenido de la ruta actual.
+import AppNavbar from '@/components/AppNavbar.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+    <div class="app">
+        <AppNavbar />
+        <main class="app__contenido">
+            <router-view />
+        </main>
+    </div>
 </template>
-
-<style scoped></style>
