@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import { reveal } from './directives/reveal'
 
 // Fuente Inter autoalojada (sin CDN, funciona offline en GitHub Pages).
 import '@fontsource/inter/400.css'
@@ -19,5 +20,8 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+
+// Directivas globales.
+app.directive('reveal', reveal)
 
 app.mount('#app')

@@ -661,6 +661,62 @@
 }
 
 /* ============================================================
+   Micro-animaciones (transiciones Vue)
+   ============================================================ */
+/* Reveal al hacer scroll (directiva v-reveal) */
+.reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+
+.reveal.in-view {
+    opacity: 1;
+    transform: none;
+}
+
+/* Transición de ruta: fade + deslizamiento leve */
+.fade-up-enter-active,
+.fade-up-leave-active {
+    transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+
+.fade-up-enter-from {
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+.fade-up-leave-to {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+/* Lista de contactos: aparición/retirada y reordenamiento suave */
+.contacto-lista {
+    position: relative;
+}
+
+.lista-enter-active,
+.lista-leave-active {
+    transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+
+.lista-enter-from,
+.lista-leave-to {
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+.lista-leave-active {
+    position: absolute;
+    width: 100%;
+}
+
+.lista-move {
+    transition: transform 0.3s var(--ease-out);
+}
+
+/* ============================================================
    Movimiento reducido
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -675,6 +731,11 @@
 
     .contacto:hover,
     .inicio__tarjeta:hover {
+        transform: none;
+    }
+
+    .reveal {
+        opacity: 1;
         transform: none;
     }
 }

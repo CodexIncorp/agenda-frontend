@@ -30,11 +30,11 @@ const nombreUsuario = computed(() => auth.usuario?.nombre_de_usuario || '')
         </section>
 
         <section class="inicio__info">
-            <div class="inicio__tarjeta">
+            <div class="inicio__tarjeta" v-reveal>
                 <h2 class="inicio__tarjeta-titulo">Contactos</h2>
                 <p>Crea, edita y elimina tus contactos con foto.</p>
             </div>
-            <div class="inicio__tarjeta">
+            <div class="inicio__tarjeta" v-reveal>
                 <h2 class="inicio__tarjeta-titulo">Perfil</h2>
                 <p>Administra tus datos y tu foto de usuario.</p>
             </div>
