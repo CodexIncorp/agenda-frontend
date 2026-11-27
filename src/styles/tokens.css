@@ -1,34 +1,37 @@
 /* src/styles/tokens.css
    Tokens de diseño del sistema "Fresh Modern".
    Única fuente de verdad de variables: todo el resto del CSS consume solo tokens.
-   Paleta de acento: esmeralda. */
+   Paleta de acento: "Cálido Coral" (coral protagonista + azul cielo de contraste). */
 
 :root {
-    /* ---------- Neutros ---------- */
-    --bg: #f7f9f8; /* fondo general, casi blanco con matiz */
+    /* ---------- Neutros (cálidos) ---------- */
+    --bg: #fbf6f0; /* crema muy suave, casi blanco con matiz cálido */
     --surface: #ffffff; /* tarjetas, paneles */
-    --surface-2: #eef2f0; /* superficies secundarias, hovers */
-    --border: #e3e8e5; /* bordes sutiles */
+    --surface-2: #f4ece2; /* superficies secundarias, hovers (beige claro) */
+    --border: #e8dfd3; /* bordes sutiles (beige algo más oscuro) */
 
     /* ---------- Texto ---------- */
-    --text: #17211d; /* casi negro con matiz del acento */
-    --text-muted: #5c6b64; /* texto secundario */
+    --text: #2b211b; /* marrón muy oscuro, casi negro con calidez */
+    --text-muted: #7c6f64; /* gris marrón apagado */
 
-    /* ---------- Acento (escala esmeralda) ---------- */
-    --accent-50: #e8faf2;
-    --accent-100: #c7f2de;
-    --accent-300: #6fdfb2;
-    --accent-500: #10b981; /* color principal */
-    --accent-600: #059669; /* base de botones / hover */
-    --accent-700: #047857; /* hover / active */
-    --accent-800: #065f46; /* active */
+    /* ---------- Acento (escala coral) ---------- */
+    --accent-50: #fdece4; /* melocotón pálido (badges, chips) */
+    --accent-100: #fad6c7; /* melocotón claro (anillo de foco) */
+    --accent-300: #f6ae94; /* melocotón medio (detalles / modo oscuro) */
+    --accent-500: #ff6b4a; /* coral naranja vibrante (principal) */
+    --accent-600: #f2552f; /* coral más intenso (hover de botones) */
+    --accent-700: #d0431f; /* coral oscuro / terracota (active) */
+    --accent-800: #a8361a; /* terracota oscuro (active) */
+
+    /* ---------- Contraste frío (azul cielo) ---------- */
+    --accent-cool: #38bdf8; /* contrapunto frío: enlaces info y detalles */
 
     /* ---------- Feedback ---------- */
-    --warning: #f59e0b;
-    --danger: #ef4444;
-    --danger-hover: #dc2626;
-    --info: #3b82f6;
-    --success: #10b981;
+    --warning: #e0a21b; /* amarillo mostaza */
+    --danger: #e15b5b; /* rojo suave */
+    --danger-hover: #c94a4a;
+    --info: #3b82f6; /* azul medio */
+    --success: #2fa36b; /* verde (semántico, se mantiene) */
 
     /* ---------- Tipografía ---------- */
     --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -61,7 +64,7 @@
     --shadow-1: 0 1px 2px rgb(0 0 0 / 0.05);
     --shadow-2: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 12px rgb(0 0 0 / 0.06);
     --shadow-3: 0 2px 4px rgb(0 0 0 / 0.04), 0 12px 32px rgb(0 0 0 / 0.1);
-    --shadow-accent: 0 4px 14px rgb(16 185 129 / 0.35);
+    --shadow-accent: 0 4px 14px rgb(255 107 74 / 0.35);
 
     /* ---------- Easings ---------- */
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -73,28 +76,30 @@
 }
 
 /* ---------- Modo oscuro (Etapa 15) ---------- */
-/* Se redefine la escala, no se invierte: fondo casi negro verdoso,
-   superficies un paso más claras y acento más claro. */
+/* Se redefine la escala, no se invierte: fondo marrón casi negro cálido,
+   superficies un paso más claras y acento en melocotón medio. */
 [data-theme="dark"] {
-    --bg: #0f1613;
-    --surface: #1a231f;
-    --surface-2: #222d28;
-    --border: #2a3530;
+    --bg: #17110e;
+    --surface: #221913;
+    --surface-2: #2c211a;
+    --border: #3a2c23;
 
-    --text: #e8f0ec;
-    --text-muted: #9fb0a8;
+    --text: #f3e9df;
+    --text-muted: #b6a79a;
 
-    /* Acento más claro para contraste sobre fondo oscuro */
-    --accent-50: #132a22;
-    --accent-100: #1b3a2e;
-    --accent-300: #6fdfb2;
-    --accent-500: #34d399;
-    --accent-600: #10b981;
-    --accent-700: #34d399;
-    --accent-800: #6fdfb2;
+    /* Acento más claro (melocotón) para contraste sobre fondo oscuro */
+    --accent-50: #2a1a14;
+    --accent-100: #3a241b;
+    --accent-300: #f6ae94;
+    --accent-500: #f6ae94;
+    --accent-600: #ff8a66;
+    --accent-700: #f6ae94;
+    --accent-800: #fad6c7;
+
+    --accent-cool: #7dd3fc;
 
     --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3);
     --shadow-2: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 12px rgb(0 0 0 / 0.35);
     --shadow-3: 0 2px 4px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.5);
-    --shadow-accent: 0 4px 14px rgb(16 185 129 / 0.25);
+    --shadow-accent: 0 4px 14px rgb(255 107 74 / 0.25);
 }
