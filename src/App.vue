@@ -4,6 +4,8 @@
 import AppNavbar from '@/components/AppNavbar.vue'
 import { useDarkMode } from '@/composables/useDarkMode'
 
+
+
 // Inicializa el modo oscuro (aplica data-theme y escucha la preferencia).
 useDarkMode()
 </script>
