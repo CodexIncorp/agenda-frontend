@@ -147,6 +147,22 @@ Las rutas privadas están protegidas por un guard que redirige a `/login` si no 
 - **Back-End:** hosting PHP.
 - **Repositorios:** GitHub (Front-End y Back-End por separado).
 
+### Despliegue en GitHub Pages
+
+El despliegue es automático mediante **GitHub Actions** (`.github/workflows/deploy.yml`), que se dispara en cada **push a `main`**: instala dependencias, compila y publica la carpeta `dist/`.
+
+Pasos para activarlo:
+
+1. Subir el código a la rama `main`.
+2. En el repositorio: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. Al hacer push a `main`, el workflow compila y publica; la URL queda en **Settings → Pages**.
+
+Notas de interoperabilidad:
+
+- La URL del API se configura en `public/config.json` (`API_URL`). Debe apuntar al Back-End real (propio o de otro equipo) y recargar el navegador.
+- El Back-End debe permitir **CORS** desde el origen de GitHub Pages (cabecera `Access-Control-Allow-Origin`, métodos `GET/POST` y cabecera `Authorization`), incluyendo la respuesta a `OPTIONS` (preflight).
+- `config.json` se carga de forma relativa a la base (`import.meta.env.BASE_URL`), por lo que funciona tanto en la raíz del dominio como en la subruta de GitHub Pages.
+
 ---
 
 ## Metodología de desarrollo
