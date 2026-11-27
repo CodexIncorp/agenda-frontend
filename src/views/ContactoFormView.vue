@@ -231,6 +231,9 @@ onMounted(() => {
                     :src="fotoPreview"
                     alt="Vista previa de la foto"
                     class="contacto-form__preview"
+                    width="96"
+                    height="96"
+                    decoding="async"
                 />
             </div>
 
