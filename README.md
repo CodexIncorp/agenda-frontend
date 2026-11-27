@@ -1,8 +1,8 @@
 # Agenda de Contactos — Front-End
 
-Aplicación web **Full Stack** de gestión de contactos. Este repositorio contiene el **Front-End** desacoplado, desarrollado con **Vue 3**, que consume un **Back-End PHP** mediante peticiones HTTP.
+Aplicación web **Full Stack** de gestión de contactos. Este repositorio contiene el **Front-End desacoplado**, desarrollado con **Vue 3**, que consume un **Back-End PHP** mediante peticiones HTTP reales.
 
-> ⚠️ **Documentación preliminar.** Este README es una primera versión alineada a las especificaciones del proyecto y se pulirá en la etapa final.
+> El Front-End es **interoperable**: para conectarlo al Back-End de otro equipo basta con editar `public/config.json` y recargar el navegador, sin recompilar ni modificar código fuente.
 
 ---
 
@@ -12,7 +12,7 @@ Aplicación web **Full Stack** de gestión de contactos. Este repositorio contie
 - **Vue Router** (hash history, compatible con GitHub Pages)
 - **Pinia** (estado y persistencia del token)
 - **Fetch API** nativa para peticiones HTTP
-- **Vite** (build / dev server)
+- **Vite** (build / servidor de desarrollo)
 
 ---
 
@@ -40,13 +40,20 @@ npm run preview  # previsualizar el build
 /public
   /config.json          # Único lugar donde se define la URL del API
 /src
-  /assets               # Estilos y recursos estáticos
+  /assets               # Estilos globales mobile-first (main.css)
   /components           # Componentes reutilizables
+    AppNavbar.vue       # Barra de navegación
+    CampoFormulario.vue # Campo label + input con v-model
+    MensajeAlerta.vue   # Alertas de éxito / error / info
+    SpinnerCarga.vue    # Indicador de carga
   /config
-    /api.js             # Lectura dinámica de /public/config.json
+    /api.js             # Lectura dinámica de /public/config.json (con caché)
   /router
-    /index.js           # Vue Router (Hash History) + guard de auth
-  /services             # Cliente HTTP y servicios (auth, contactos)
+    /index.js           # Vue Router (Hash History) + guard de autenticación
+  /services
+    http.js             # Cliente HTTP centralizado (token, JSON, FormData, 401/403)
+    authService.js      # Endpoints de autenticación
+    contactosService.js # Endpoints de contactos
   /stores
     /auth.js            # Pinia store: token y datos del usuario
   /views                # Componentes de página
@@ -79,6 +86,16 @@ Para conectar el Front-End de este equipo con el Back-End de otro equipo, basta 
 
 ---
 
+## Funcionalidades
+
+- **Autenticación:** inicio de sesión y registro con validación en el Front-End.
+- **Contactos (CRUD):** listado, creación, edición y eliminación, con confirmación en línea al eliminar.
+- **Perfil:** consulta y edición de datos del usuario y cambio de foto.
+- **Imágenes:** subida de foto de usuario y de contacto con `multipart/form-data` (JPG, PNG, WEBP). El `Content-Type` lo fija el navegador; no se establece manualmente.
+- **Feedback:** spinner durante las peticiones y mensajes de éxito/error en todas las operaciones.
+
+---
+
 ## Endpoints consumidos
 
 | Método | Endpoint | Descripción |
@@ -108,11 +125,13 @@ Para conectar el Front-End de este equipo con el Back-End de otro equipo, basta 
 | `/agenda/:id` | Editar contacto |
 | `/perfil` | Perfil del usuario |
 
+Las rutas privadas están protegidas por un guard que redirige a `/login` si no hay sesión.
+
 ---
 
 ## Publicación
 
-- **Front-End:** GitHub Pages (hash history + `base` relativa en `vite.config.js`).
+- **Front-End:** GitHub Pages (hash history + `base: './'` en `vite.config.js`).
 - **Back-End:** hosting PHP.
 - **Repositorios:** GitHub (Front-End y Back-End por separado).
 
@@ -121,5 +140,10 @@ Para conectar el Front-End de este equipo con el Back-End de otro equipo, basta 
 ## Metodología de desarrollo
 
 - Ramas por feature con **GitHub Flow** y merge `--no-ff` a `main`.
-- Commits con **Conventional Commits** en español.
-- Cada etapa del desarrollo se documenta en commits atómicos.
+- Commits con **Conventional Commits** en español, imperativo. Cada commit compila y es autocontenido.
+
+---
+
+## Notas
+
+- Durante el build aparece una advertencia benigna `INEFFECTIVE_DYNAMIC_IMPORT` por el import diferido del router en `http.js` (evita una dependencia circular). No afecta al funcionamiento.
