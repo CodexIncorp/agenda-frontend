@@ -1,0 +1,76 @@
+/* src/styles/base.css
+   Reset y estilos base globales.
+   Consume únicamente tokens de tokens.css. */
+
+/* Reset básico */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    /* Scroll suave para anclas (respeta reduced-motion en components.css) */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--fs-base);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    /* Evita el retraso de toque y el destello gris al tocar en móviles */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+#app {
+    min-height: 100vh;
+}
+
+/* Tipografía base */
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Layout principal */
+.app__contenido {
+    max-width: var(--contenedor);
+    margin: 0 auto;
+    padding: var(--space-4);
+}
+
+/* Scrollbar sutil */
+@supports selector(::-webkit-scrollbar) {
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: var(--radius-full);
+        border: 2px solid var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--text-muted);
+    }
+}
