@@ -4,8 +4,10 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-// Estilos globales mobile-first.
-import './assets/main.css'
+// Estilos globales: tokens → base → components.
+import './styles/tokens.css'
+import './styles/base.css'
+import './styles/components.css'
 
 const app = createApp(App)
 
