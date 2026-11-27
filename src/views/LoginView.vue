@@ -2,6 +2,7 @@
 // Vista de inicio de sesión.
 // Valida el formulario, llama al store de autenticación y redirige al agenda.
 import { reactive, ref } from 'vue'
+import { LogIn } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import CampoFormulario from '@/components/CampoFormulario.vue'
@@ -89,7 +90,10 @@ async function iniciarSesion() {
 
                 <button type="submit" class="btn formulario__boton" :disabled="cargando">
                     <SpinnerCarga v-if="cargando" />
-                    <span v-else>Ingresar</span>
+                    <template v-else>
+                        <LogIn :size="20" :stroke-width="2" />
+                        <span>Ingresar</span>
+                    </template>
                 </button>
             </form>
 

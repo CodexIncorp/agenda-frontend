@@ -2,6 +2,7 @@
 // Vista de agenda: listado de contactos del usuario.
 // Permite crear, editar y eliminar contactos.
 import { onMounted, ref } from 'vue'
+import { Plus, Pencil, Trash2, Check, X } from 'lucide-vue-next'
 import * as contactosService from '@/services/contactosService'
 import SpinnerCarga from '@/components/SpinnerCarga.vue'
 import MensajeAlerta from '@/components/MensajeAlerta.vue'
@@ -73,7 +74,8 @@ onMounted(cargarContactos);
         <header class="agenda__cabecera">
             <h1 class="agenda__titulo">Mis contactos</h1>
             <router-link to="/agenda/crear" class="btn agenda__crear">
-                + Nuevo contacto
+                <Plus :size="20" :stroke-width="2" />
+                <span>Nuevo contacto</span>
             </router-link>
         </header>
 
@@ -127,14 +129,18 @@ onMounted(cargarContactos);
                             @click="eliminarContacto(contacto.id)"
                         >
                             <SpinnerCarga v-if="eliminandoId === contacto.id" />
-                            <span v-else>Sí</span>
+                            <template v-else>
+                                <Check :size="18" :stroke-width="2" />
+                                <span>Sí</span>
+                            </template>
                         </button>
                         <button
                             type="button"
                             class="btn btn--secundario contacto__boton"
                             @click="cancelarEliminacion"
                         >
-                            No
+                            <X :size="18" :stroke-width="2" />
+                            <span>No</span>
                         </button>
                     </template>
 
@@ -144,14 +150,16 @@ onMounted(cargarContactos);
                             :to="`/agenda/${contacto.id}`"
                             class="btn btn--secundario contacto__boton"
                         >
-                            Editar
+                            <Pencil :size="18" :stroke-width="2" />
+                            <span>Editar</span>
                         </router-link>
                         <button
                             type="button"
                             class="btn btn--peligro contacto__boton"
                             @click="pedirEliminacion(contacto.id)"
                         >
-                            Eliminar
+                            <Trash2 :size="18" :stroke-width="2" />
+                            <span>Eliminar</span>
                         </button>
                     </template>
                 </div>

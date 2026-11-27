@@ -3,6 +3,7 @@
 // Muestra y permite editar los datos de la cuenta y la foto de usuario.
 // Si se cambia la foto se envía FormData; si no, se envía JSON.
 import { computed, onMounted, reactive, ref } from 'vue'
+import { Save } from 'lucide-vue-next'
 import { useAuthStore } from '@/stores/auth'
 import CampoFormulario from '@/components/CampoFormulario.vue'
 import SpinnerCarga from '@/components/SpinnerCarga.vue'
@@ -198,7 +199,10 @@ onMounted(cargarPerfil);
 
                 <button type="submit" class="btn formulario__boton" :disabled="guardando">
                     <SpinnerCarga v-if="guardando" />
-                    <span v-else>Guardar cambios</span>
+                    <template v-else>
+                        <Save :size="20" :stroke-width="2" />
+                        <span>Guardar cambios</span>
+                    </template>
                 </button>
             </form>
         </section>
