@@ -65,27 +65,46 @@ npm run preview  # previsualizar el build
 
 ## Configuración del API (interoperabilidad)
 
-La URL base del API se define **únicamente** en `/public/config.json`:
+La URL base del API se define **únicamente** en `/public/config.json`. Es el
+**único punto de conexión** entre el Front-End y el Back-End:
 
 ```json
 {
-    "API_URL": "https://equipo1.free.nf/api"
+    "API_URL": "https://TU-BACKEND.com/api"
 }
 ```
 
-Para conectar el Front-End de este equipo con el Back-End de otro equipo, basta con **editar `config.json` y recargar el navegador**: no se recompila ni se modifica código fuente.
+> Para conectar otro backend (propio o de otro equipo) basta con **editar este
+> archivo y recargar el navegador**. No se recompila ni se modifica código.
 
-### Conexión con el Back-End (placeholder)
-
-Cuando el Back-End esté disponible, este es el **único** cambio necesario:
+### Dónde se conecta la API
 
 | Elemento | Ubicación | Qué hacer |
 |----------|-----------|-----------|
-| `API_URL` (placeholder) | `/public/config.json` | Reemplazar `https://equipo1.free.nf/api` por la URL base real del Back-End (ej. `https://otro-equipo.free.nf/api`). |
+| `API_URL` | `/public/config.json` | Reemplazar el valor por la URL base real del Back-End. |
+| Lógica de lectura | `src/config/api.js` | Lee `config.json` una vez y lo cachea (no editar). |
+| Cliente HTTP | `src/services/http.js` | Añade token, serializa JSON y maneja 401/403 (no editar). |
 
-- **No hay URLs del API hardcodeadas** en los componentes: todas las peticiones pasan por `src/services/http.js`, que lee la URL desde `config.json`.
-- No se debe recompilar: después de guardar `config.json`, **recargar el navegador** es suficiente.
-- La URL debe incluir la ruta base `/api` del Back-End (sin barra final), por ejemplo `https://servidor.com/api`.
+- **No hay URLs hardcodeadas** en los componentes: todo pasa por `http.js`.
+- La URL debe incluir la ruta base `/api` **sin barra final** (ej. `https://servidor.com/api`).
+- Tras guardar `config.json`, **recargar el navegador** es suficiente.
+
+### Indicaciones para el Back-End
+
+Para que este Front-End funcione contra un Back-End, éste debe cumplir el contrato:
+
+1. **CORS habilitado** para el origen del Front-End:
+   - `Access-Control-Allow-Origin` con el origen de la app (o `*` en desarrollo).
+   - Métodos permitidos: `GET`, `POST`, `OPTIONS`.
+   - Cabeceras permitidas: `Authorization`, `Content-Type`.
+   - Responder correctamente a `OPTIONS` (preflight).
+2. **Autenticación por token propietario** (no JWT, no sesiones PHP):
+   - El login devuelve `{ success, token, usuario }`.
+   - Las peticiones protegidas esperan `Authorization: Bearer <TOKEN>`.
+3. **Formato de respuesta JSON**: `{ "success": true|false, "message": "..." }`.
+4. **Endpoints exactos** (rutas y nombres no modificables): ver tabla en
+   "Endpoints consumidos".
+5. **Subida de imágenes** en `multipart/form-data` (JPG, PNG, WEBP).
 
 ---
 
