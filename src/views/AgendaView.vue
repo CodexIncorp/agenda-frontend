@@ -2,7 +2,7 @@
 // Vista de agenda: listado de contactos del usuario.
 // Permite crear, editar y eliminar contactos.
 import { onMounted, ref } from 'vue'
-import { Plus, Pencil, Trash2, Check, X } from 'lucide-vue-next'
+import { Plus, Pencil, Trash2, Check, X, Users } from 'lucide-vue-next'
 import * as contactosService from '@/services/contactosService'
 import SpinnerCarga from '@/components/SpinnerCarga.vue'
 import MensajeAlerta from '@/components/MensajeAlerta.vue'
@@ -85,9 +85,12 @@ onMounted(cargarContactos);
         <SpinnerCarga v-if="cargando" />
 
         <!-- Estado vacío -->
-        <p v-else-if="contactos.length === 0" class="agenda__vacio">
-            Aún no tienes contactos. Crea el primero con el botón de arriba.
-        </p>
+        <div v-else-if="contactos.length === 0" class="agenda__vacio">
+            <Users class="agenda__vacio-icono" :size="48" :stroke-width="1.5" />
+            <p class="agenda__vacio-texto">
+                Aún no tienes contactos. Crea el primero con el botón de arriba.
+            </p>
+        </div>
 
         <!-- Listado de contactos -->
         <TransitionGroup v-else name="lista" tag="ul" class="contacto-lista">
@@ -97,6 +100,10 @@ onMounted(cargarContactos);
                     :src="contacto.foto"
                     :alt="`Foto de ${contacto.nombre}`"
                     class="contacto__foto"
+                    width="56"
+                    height="56"
+                    loading="lazy"
+                    decoding="async"
                 />
                 <div
                     v-else

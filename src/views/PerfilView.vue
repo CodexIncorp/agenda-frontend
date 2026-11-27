@@ -156,6 +156,9 @@ onMounted(cargarPerfil);
                     :src="fotoPreview"
                     :alt="`Foto de ${usuarioActual}`"
                     class="perfil__foto"
+                    width="96"
+                    height="96"
+                    decoding="async"
                 />
                 <div v-else class="perfil__foto perfil__foto--vacia" aria-hidden="true">
                     {{ (usuarioActual || '?').charAt(0).toUpperCase() }}
