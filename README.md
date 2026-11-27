@@ -75,6 +75,18 @@ La URL base del API se define **únicamente** en `/public/config.json`:
 
 Para conectar el Front-End de este equipo con el Back-End de otro equipo, basta con **editar `config.json` y recargar el navegador**: no se recompila ni se modifica código fuente.
 
+### Conexión con el Back-End (placeholder)
+
+Cuando el Back-End esté disponible, este es el **único** cambio necesario:
+
+| Elemento | Ubicación | Qué hacer |
+|----------|-----------|-----------|
+| `API_URL` (placeholder) | `/public/config.json` | Reemplazar `https://equipo1.free.nf/api` por la URL base real del Back-End (ej. `https://otro-equipo.free.nf/api`). |
+
+- **No hay URLs del API hardcodeadas** en los componentes: todas las peticiones pasan por `src/services/http.js`, que lee la URL desde `config.json`.
+- No se debe recompilar: después de guardar `config.json`, **recargar el navegador** es suficiente.
+- La URL debe incluir la ruta base `/api` del Back-End (sin barra final), por ejemplo `https://servidor.com/api`.
+
 ---
 
 ## Autenticación
