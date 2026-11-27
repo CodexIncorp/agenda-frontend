@@ -2,6 +2,7 @@
 // Barra de navegación superior.
 // Muestra enlaces según el estado de autenticación y permite cerrar sesión.
 import { useRouter } from 'vue-router'
+import { Users, User, LogOut } from 'lucide-vue-next'
 import { useAuthStore } from '@/stores/auth'
 
 const auth = useAuthStore()
@@ -23,9 +24,18 @@ async function cerrarSesion() {
 
             <div class="navbar__links">
                 <template v-if="auth.estaAutenticado">
-                    <router-link to="/agenda" class="navbar__link">Contactos</router-link>
-                    <router-link to="/perfil" class="navbar__link">Perfil</router-link>
-                    <button class="navbar__boton" @click="cerrarSesion">Salir</button>
+                    <router-link to="/agenda" class="navbar__link">
+                        <Users :size="20" :stroke-width="2" />
+                        <span>Contactos</span>
+                    </router-link>
+                    <router-link to="/perfil" class="navbar__link">
+                        <User :size="20" :stroke-width="2" />
+                        <span>Perfil</span>
+                    </router-link>
+                    <button class="navbar__boton" @click="cerrarSesion">
+                        <LogOut :size="20" :stroke-width="2" />
+                        <span>Salir</span>
+                    </button>
                 </template>
                 <template v-else>
                     <router-link to="/login" class="navbar__link">Iniciar sesión</router-link>

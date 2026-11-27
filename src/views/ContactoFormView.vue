@@ -4,6 +4,7 @@
 // - Edita: POST /contactos/actualizar.php (foto opcional; conserva la actual).
 // La subida de imagen usa FormData; http.js NO fija el Content-Type (lo hace el navegador).
 import { computed, onMounted, reactive, ref } from 'vue'
+import { Save, X } from 'lucide-vue-next'
 import { useRoute, useRouter } from 'vue-router'
 import * as contactosService from '@/services/contactosService'
 import CampoFormulario from '@/components/CampoFormulario.vue'
@@ -236,10 +237,14 @@ onMounted(() => {
             <div class="contacto-form__acciones">
                 <button type="submit" class="btn" :disabled="guardando">
                     <SpinnerCarga v-if="guardando" />
-                    <span v-else>Guardar</span>
+                    <template v-else>
+                        <Save :size="20" :stroke-width="2" />
+                        <span>Guardar</span>
+                    </template>
                 </button>
                 <router-link to="/agenda" class="btn btn--secundario">
-                    Cancelar
+                    <X :size="20" :stroke-width="2" />
+                    <span>Cancelar</span>
                 </router-link>
             </div>
         </form>

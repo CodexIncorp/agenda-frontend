@@ -2,6 +2,7 @@
 // Vista de registro de usuario.
 // Valida el formulario, registra al usuario y redirige al login.
 import { reactive, ref } from 'vue'
+import { UserPlus } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 import * as authService from '@/services/authService'
 import CampoFormulario from '@/components/CampoFormulario.vue'
@@ -107,7 +108,10 @@ async function registrar() {
 
                 <button type="submit" class="btn formulario__boton" :disabled="cargando">
                     <SpinnerCarga v-if="cargando" />
-                    <span v-else>Registrarme</span>
+                    <template v-else>
+                        <UserPlus :size="20" :stroke-width="2" />
+                        <span>Registrarme</span>
+                    </template>
                 </button>
             </form>
 
